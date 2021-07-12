@@ -8,3 +8,7 @@ class ConnectionError(Exception):
 
 class MaxAttemptsExceeded(Exception):
     pass
+
+
+class BadCertificateEnvironment(Exception):
+    pass

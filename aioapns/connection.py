@@ -29,6 +29,7 @@ from aioapns.exceptions import (
     ConnectionClosed,
     ConnectionError,
     MaxAttemptsExceeded,
+    BadCertificateEnvironment,
 )
 from aioapns.logging import logger
 
@@ -403,10 +404,11 @@ class APNsBaseConnectionPool:
             except NoAvailableStreamIDError:
                 connection.close()
             except ConnectionClosed:
-                logger.warning(
-                    "Could not send notification %s: " "ConnectionClosed",
-                    request.notification_id,
-                )
+                return {
+                    'notification_id': None,
+                    'status': 400,
+                    'description': BadCertificateEnvironment
+                }
             except FlowControlError:
                 logger.debug(
                     "Got FlowControlError for notification %s",

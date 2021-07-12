@@ -23,7 +23,7 @@ setup(
     license="Apache License, Version 2.0",
     author="Alexander Tikhonov",
     author_email="random.gauss@gmail.com",
-    url="https://github.com/Fatal1ty/aioapns",
+    url="https://github.com/E-goi/aioapns",
     packages=find_packages(exclude=("tests",)),
     install_requires=[
         "h2>=4.0.0",

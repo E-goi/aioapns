@@ -56,7 +56,7 @@ class APNs:
     async def send_notification(self, request):
         response = await self.pool.send_notification(request)
 
-        if response.is_successful:
+        if not response.is_successful:
             logger.error(
                 "Status of notification %s is %s (%s)",
                 request.notification_id,

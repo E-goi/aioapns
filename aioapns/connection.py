@@ -409,11 +409,7 @@ class APNsBaseConnectionPool:
             except NoAvailableStreamIDError:
                 connection.close()
             except ConnectionClosed:
-                return {
-                    'is_successful': False,
-                    'status': 400,
-                    'description': BadCertificateEnvironment
-                }
+                raise BadCertificateEnvironment
             except FlowControlError:
                 logger.debug(
                     "Got FlowControlError for notification %s",

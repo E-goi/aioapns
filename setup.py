@@ -3,7 +3,7 @@
 from setuptools import find_packages, setup
 
 setup(
-    name="aioapns",
+    name="aioapnsegoifork",
     version="2.1",
     description="An efficient APNs Client Library for Python/asyncio",
     long_description=open("README.rst").read(),

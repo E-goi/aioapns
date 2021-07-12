@@ -405,7 +405,7 @@ class APNsBaseConnectionPool:
                 connection.close()
             except ConnectionClosed:
                 return {
-                    'notification_id': None,
+                    'is_successful': False,
                     'status': 400,
                     'description': BadCertificateEnvironment
                 }

@@ -4,7 +4,7 @@ from setuptools import find_packages, setup
 
 setup(
     name="aioapnsegoifork",
-    version="2.0.2",
+    version="2.1",
     description="An efficient APNs Client Library for Python/asyncio",
     long_description=open("README.rst").read(),
     platforms="all",
@@ -18,6 +18,7 @@ setup(
         "Programming Language :: Python :: 3.7",
         "Programming Language :: Python :: 3.8",
         "Programming Language :: Python :: 3.9",
+        "Programming Language :: Python :: 3.10",
         "Development Status :: 5 - Production/Stable",
     ],
     license="Apache License, Version 2.0",

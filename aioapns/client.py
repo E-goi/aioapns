@@ -1,8 +1,11 @@
-import asyncio
 from ssl import SSLContext
 from typing import Optional
 
-from aioapns.connection import APNsCertConnectionPool, APNsKeyConnectionPool
+from aioapns.connection import (
+    APNsBaseConnectionPool,
+    APNsCertConnectionPool,
+    APNsKeyConnectionPool,
+)
 from aioapns.logging import logger
 
 
@@ -15,13 +18,13 @@ class APNs:
         team_id: Optional[str] = None,
         topic: Optional[str] = None,
         max_connections: int = 10,
-        max_connection_attempts: Optional[int] = None,
-        loop: Optional[asyncio.AbstractEventLoop] = None,
+        max_connection_attempts: int = 5,
         use_sandbox: bool = False,
         no_cert_validation: bool = False,
         ssl_context: Optional[SSLContext] = None,
     ):
 
+        self.pool: APNsBaseConnectionPool
         if client_cert is not None and key is not None:
             raise ValueError("cannot specify both client_cert and key")
         elif client_cert:
@@ -30,12 +33,11 @@ class APNs:
                 topic=topic,
                 max_connections=max_connections,
                 max_connection_attempts=max_connection_attempts,
-                loop=loop,
                 use_sandbox=use_sandbox,
                 no_cert_validation=no_cert_validation,
                 ssl_context=ssl_context,
             )
-        elif all((key, key_id, team_id, topic)):
+        elif key and key_id and team_id and topic:
             self.pool = APNsKeyConnectionPool(
                 key_file=key,
                 key_id=key_id,
@@ -43,7 +45,6 @@ class APNs:
                 topic=topic,
                 max_connections=max_connections,
                 max_connection_attempts=max_connection_attempts,
-                loop=loop,
                 use_sandbox=use_sandbox,
                 ssl_context=ssl_context,
             )
